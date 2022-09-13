@@ -8,7 +8,7 @@
     <!-- Menu Toggle -->
     <div class="menu-toggle-wrap" :style="`${is_expanded ? 'justify-content: flex-end' : 'justify-content: center;' }`">
       <button class="menu-toggle" @click="toggleMenu">
-        <i class='bx bxs-right-arrow-square'></i>
+        <i class='bx bx-menu-alt-left'></i>
       </button>
     </div>
 
@@ -26,14 +26,23 @@
         <span class="nav-text">About</span>
       </router-link>
 
-      <router-link class="nav-link" to="/">
+      <router-link class="nav-link" to="/products">
         <i class='bx bxs-package'></i>
         <span class="nav-text">Products</span>
       </router-link>
 
-      <router-link class="nav-link" to="/about">
+      <router-link class="nav-link" to="/services">
         <i class='bx bxs-briefcase-alt-2'></i>
         <span class="nav-text">Services</span>
+      </router-link>
+    </div>
+
+    <div class="flex"></div>
+
+    <div class="menu">
+      <router-link class="nav-link" to="/theme">
+        <i class='bx bxs-palette'></i>
+        <span class="nav-text">Theme</span>
       </router-link>
     </div>
 
@@ -61,6 +70,10 @@ aside {
   min-height: 100vh;
   padding: 1rem;
   transition: 0.3s ease-out;
+
+  .flex{
+    flex: 1 1 0;
+  }
 
   .logo {
     margin-bottom: 1rem;
@@ -97,6 +110,13 @@ aside {
     }
   }
 
+  h3{
+    color: var(--grey);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
   h3,
   .nav-link .nav-text {
     opacity: 0;
@@ -105,6 +125,7 @@ aside {
 
   .menu {
     margin: 0 -1rem;
+
     .nav-link {
       display: flex;
       align-items: center;
@@ -112,24 +133,24 @@ aside {
       padding: 0.5rem 1rem;
       transition: 0.3s ease-out;
 
-      .bx{
+      .bx {
         font-size: 2rem;
         color: var(--light);
         transition: 0.2s ease-out;
       }
 
-      .nav-text{
+      .nav-text {
         color: var(--light);
-        margin-left: 0.5rem;
         font-size: 1.2rem;
         transition: 0.2s ease-out;
       }
 
-      &:hover{
+      &:hover, &.router-link-exact-active {
         background-color: var(--dark-alt);
-        border-left: 6px solid var(--primary);
+        border-right: 5px solid var(--primary);
 
-        .bx, .nav-text {
+        .bx,
+        .nav-text {
           color: var(--primary);
         }
       }
@@ -150,6 +171,12 @@ aside {
     h3,
     .nav-link .nav-text {
       opacity: 1;
+    }
+
+    .nav-link {
+      .bx {
+        margin-right: 0.8rem;
+      }
     }
   }
 
