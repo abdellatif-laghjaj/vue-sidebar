@@ -6,7 +6,7 @@
     </div>
 
     <!-- Menu -->
-    <div class="menu-toggle-wrap">
+    <div class="menu-toggle-wrap" :style="`${is_expanded ? 'justify-content: flex-end' : 'justify-content: center;' }`">
       <button class="menu-toggle" @click="toggleMenu">
         <box-icon name='right-arrow-square' type='solid' color='#fffefe' ></box-icon>
       </button>
@@ -38,6 +38,10 @@ aside{
 
   &.is_expanded{
     width: var(--sidebar-width);
+
+    .menu-toggle-wrap{
+      top: -3rem;
+    }
   }
 
   .logo{
@@ -45,6 +49,22 @@ aside{
 
     img{
       width: 2rem;
+    }
+  }
+
+  .menu-toggle-wrap{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+    top: 0;
+    transition: 0.3s ease-out;
+
+    .menu-toggle{
+      transition: 0.3s ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
