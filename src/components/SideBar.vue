@@ -2,30 +2,56 @@
   <aside :class="`${is_expanded ? 'is_expanded' : ''}`">
     <!-- Logo -->
     <div class="logo">
-      <img src="../assets/vue.svg" /> 
+      <img src="../assets/vue.svg" />
+    </div>
+
+    <!-- Menu Toggle -->
+    <div class="menu-toggle-wrap" :style="`${is_expanded ? 'justify-content: flex-end' : 'justify-content: center;' }`">
+      <button class="menu-toggle" @click="toggleMenu">
+        <i class='bx bxs-right-arrow-square'></i>
+      </button>
     </div>
 
     <!-- Menu -->
-    <div class="menu-toggle-wrap" :style="`${is_expanded ? 'justify-content: flex-end' : 'justify-content: center;' }`">
-      <button class="menu-toggle" @click="toggleMenu">
-        <box-icon name='right-arrow-square' type='solid' color='#fffefe' ></box-icon>
-      </button>
+    <h3>Menu</h3>
+
+    <div class="menu">
+      <router-link class="nav-link" to="/">
+        <i class='bx bxs-home-smile'></i>
+        <span class="nav-text">Home</span>
+      </router-link>
+
+      <router-link class="nav-link" to="/about">
+        <i class='bx bx-message-dots'></i>
+        <span class="nav-text">About</span>
+      </router-link>
+
+      <router-link class="nav-link" to="/">
+        <i class='bx bxs-package'></i>
+        <span class="nav-text">Products</span>
+      </router-link>
+
+      <router-link class="nav-link" to="/about">
+        <i class='bx bxs-briefcase-alt-2'></i>
+        <span class="nav-text">Services</span>
+      </router-link>
     </div>
+
   </aside>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+import { ref } from 'vue'
 
-  const is_expanded = ref(false)
+const is_expanded = ref(false)
 
-  const toggleMenu = () => {
-    is_expanded.value = !is_expanded.value
-  }
+const toggleMenu = () => {
+  is_expanded.value = !is_expanded.value
+}
 </script>
 
 <style lang="scss">
-aside{
+aside {
   display: flex;
   flex-direction: column;
   background-color: var(--dark);
@@ -36,23 +62,15 @@ aside{
   padding: 1rem;
   transition: 0.3s ease-out;
 
-  &.is_expanded{
-    width: var(--sidebar-width);
-
-    .menu-toggle-wrap{
-      top: -3rem;
-    }
-  }
-
-  .logo{
+  .logo {
     margin-bottom: 1rem;
 
-    img{
+    img {
       width: 2rem;
     }
   }
 
-  .menu-toggle-wrap{
+  .menu-toggle-wrap {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
@@ -60,15 +78,82 @@ aside{
     top: 0;
     transition: 0.3s ease-out;
 
-    .menu-toggle{
+    .menu-toggle {
       transition: 0.3s ease-out;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      .bx {
+        font-size: 1.6rem;
+        transition: 0.2s ease-out;
+        color: var(--light);
+
+        &:hover {
+          color: var(--primary);
+          transform: translateX(0.3rem);
+        }
+      }
     }
   }
 
-  @media (max-width: 768px){
+  h3,
+  .nav-link .nav-text {
+    opacity: 0;
+    transition: 0.3s ease-out;
+  }
+
+  .menu {
+    margin: 0 -1rem;
+    .nav-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: 0.3s ease-out;
+
+      .bx{
+        font-size: 2rem;
+        color: var(--light);
+        transition: 0.2s ease-out;
+      }
+
+      .nav-text{
+        color: var(--light);
+        margin-left: 0.5rem;
+        font-size: 1.2rem;
+        transition: 0.2s ease-out;
+      }
+
+      &:hover{
+        background-color: var(--dark-alt);
+        border-left: 6px solid var(--primary);
+
+        .bx, .nav-text {
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
+  &.is_expanded {
+    width: var(--sidebar-width);
+
+    .menu-toggle-wrap {
+      top: -3rem;
+
+      .menu-toggle {
+        transform: rotate(180deg);
+      }
+    }
+
+    h3,
+    .nav-link .nav-text {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
     position: fixed;
     z-index: 99;
   }
